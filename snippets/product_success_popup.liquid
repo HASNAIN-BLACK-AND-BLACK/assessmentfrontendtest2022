@@ -1,0 +1,185 @@
+<div id="productslide_modal" class="products_popup__overlay">
+    <div class="products_popup__container">
+        <div class="products_popup__content">
+            <div class="container-products_popup">
+                <div class="product-content">
+                    <div class="products_popup-image">
+                        <img src="" alt="">
+                    </div>
+                    <div class="products_popup-product">
+                        <h2 class="products_popup-title"></h2>
+                        <div class="p-title"></div>
+                        <div class="price"></div>
+                        <div class="totaitems"></div>
+                        <div class="totalprice"></div> 
+                    </div>
+                </div>
+
+                <div class="products_popup-ctas">
+                    <button class="continue-shopping"> Continue Shopping </button>
+                    <button class="goto-cart" onclick="window.location.href='/cart'"> Go to Cart </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+ <div id="loader" class="lds-dual-ring hidden overlay"></div>
+
+<style>
+    .products_popup__overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgb(0, 0, 0, 0.7);
+        transition: opacity 500ms ease-in-out;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .products_popup__overlay.active {
+        visibility: visible;
+        opacity: 1;
+        z-index: 99999999999999999999999;
+    }
+
+    .products_popup__container {
+        padding: 24px;
+        background: #fff;
+        width: 40%;
+        position: relative;
+    }
+
+    .products_popup__container h2 {
+        color: #539f4e;
+        font-size: 16px;
+        padding: 0px 0px 0px 20px;
+        font-family: Verdana, sans-serif;
+        margin-top: 0;
+        text-transform: capitalize;
+
+    }
+
+    .product-content {
+        display: flex;
+    }
+
+    .p-title,.price,.totaitems,.totalprice {
+        margin: 5px 20px;
+    }
+
+    .products_popup__close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        transition: all 200ms ease-out;
+        color: #333;
+        font-size: 30px;
+        font-weight: bold;
+        line-height: 1.25;
+        text-decoration: none;
+        cursor: pointer !important;
+
+    }
+
+    .products_popup__close:hover {
+        color: #660000;
+    }
+
+    .products_popup__content {
+        max-height: 30%;
+        overflow: auto;
+    }
+
+    .products_popup-image img {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .products_popup-ctas {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button.continue-shopping {
+        background-color: black;
+        color: white;
+        border: 0px;
+        padding: 15px 20px;
+        font-size: 15px;
+        text-transform: uppercase;
+        cursor: pointer;
+        width: 50%;
+
+    }
+
+    button.goto-cart {
+        background-color: #b59137;
+        color: white;
+        border: 0px;
+        padding: 15px 20px;
+        font-size: 15px;
+        text-transform: uppercase;
+        cursor: pointer;
+        width: 50%;
+        margin: 0px 0px 0px 10px;
+    }
+
+    @media screen and (max-width: 1280px) {
+        .products_popup__container {
+            width: 60%;
+        }
+    }
+
+    @media screen and (max-width: 800px) {
+        .products_popup__container {
+            width: 80%;
+        }
+
+        button.continue-shopping,
+        button.goto-cart {
+            width: 100%;
+        }
+
+        .products_popup-ctas {
+            display: block;
+        }
+
+        button.goto-cart {
+            margin: unset;
+            margin-top: 8px;
+        }
+
+
+
+
+    }
+
+    @media only screen and (max-width: 500px) {
+        .product-content {
+
+            display: block;
+            align-items: center;
+
+        }
+
+        .p-title {
+            margin: 11px 0px;
+        }
+
+        .price {
+            margin: 10px 0px;
+        }
+
+        .products_popup__container h2 {
+            font-size: 14px;
+        }
+    }
+</style>

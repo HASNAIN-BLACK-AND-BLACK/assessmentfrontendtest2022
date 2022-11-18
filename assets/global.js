@@ -945,3 +945,45 @@ class ProductRecommendations extends HTMLElement {
 }
 
 customElements.define('product-recommendations', ProductRecommendations);
+
+
+let wishlishItems = localStorage.getItem("wishlistProducts") || [];
+console.log(wishlishItems)
+if(wishlishItems.length > 0 ){wishlishItems = wishlishItems.split(',')}
+Shopify.wishlistProducts = [...wishlishItems];
+
+function onlyUnique(value, index, self) {
+	return self.indexOf(value) === index;
+}
+
+
+function removeItem(array, item) {
+	const index = array.indexOf(item);
+	if (index > -1) { // only splice array when item is found
+		array.splice(index, 1); // 2nd parameter means remove one item only
+	}
+}
+
+$(document).ready(function() {
+	$("body").delegate("span.wishlist_btn", "click", function(e) {
+
+    let wishlishItems = localStorage.getItem("wishlistProducts") || [];
+    if(wishlishItems.length > 0 ){wishlishItems = wishlishItems.split(',')}
+    Shopify.wishlistProducts = [...wishlishItems];
+
+		if ($(this).hasClass('active')) {
+			removeItem(Shopify.wishlistProducts, $(this).attr('handle'))
+		} else {
+			Shopify.wishlistProducts.push($(this).attr('handle'))
+		}
+		$(this).toggleClass('active');
+		Shopify.wishlistProducts = Shopify.wishlistProducts.filter(onlyUnique);
+		localStorage.setItem("wishlistProducts", Shopify.wishlistProducts);
+		console.log(Shopify.wishlistProducts)
+	});
+	$.each(Shopify.wishlistProducts, function(key, item) {
+		$(`span.wishlist_btn[handle="${item}"]`).addClass("active");
+	});
+
+
+});

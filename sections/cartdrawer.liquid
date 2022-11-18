@@ -1,0 +1,83 @@
+
+{%render 'minicart-template'%}
+
+<div class="CartDrawer">
+	<div class="overlay remveoverlay"><span></span></div>
+	<div class="cart-drawer cart-drawer-right">
+		<div class="mainheader">
+			<div class="heading_close">
+				<div class="drawerheader">
+					<h3>Cart</h3> </div>
+				<div class="cart-drawer-close-btn"> <i class="ri-close-line"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg></i> </div>
+			</div>
+			<div id="minicart_cintent">
+				<div class="emptyCart{% if cart.item_count > 0%} remveoverlay {%endif%}">
+					<div class="cart_empty">
+						<svg xmlns="http://www.w3.org/2000/svg" width="248" height="248" viewBox="0 0 248 248" fill="none">
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M59.0241 62.0008H220.036L204.701 155.001H74.3585L59.0241 62.0008Z" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M92.9954 206.667C98.7024 206.667 103.329 202.04 103.329 196.333C103.329 190.626 98.7024 186 92.9954 186C87.2885 186 82.6621 190.626 82.6621 196.333C82.6621 202.04 87.2885 206.667 92.9954 206.667Z" stroke="black" stroke-width="5" />
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M185.995 206.667C191.702 206.667 196.329 202.04 196.329 196.333C196.329 190.626 191.702 186 185.995 186C180.289 186 175.662 190.626 175.662 196.333C175.662 202.04 180.289 206.667 185.995 206.667Z" stroke="black" stroke-width="5" />
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M122 102C126.418 102 130 98.4183 130 94C130 89.5817 126.418 86 122 86C117.582 86 114 89.5817 114 94C114 98.4183 117.582 102 122 102Z" fill="#100F0F" stroke="black" stroke-width="2" />
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M155.5 101C159.642 101 163 97.6421 163 93.5C163 89.3579 159.642 86 155.5 86C151.358 86 148 89.3579 148 93.5C148 97.6421 151.358 101 155.5 101Z" fill="#100F0F" stroke="black" stroke-width="2" />
+							<path d="M100.5 128.5C113.167 119.834 146.2 107.7 177 128.5" stroke="black" stroke-width="5" stroke-linecap="round" />
+							<path d="M72.3333 62.0023H31" stroke="black" stroke-width="5" stroke-linecap="round" /> </svg>
+					</div>
+				</div>
+				<form action="/cart" method="post">
+					<div class="drawer__inner {% if cart.item_count <= 0%} remveoverlay {%endif%}"> {% for item in cart.items %}
+						<div class="miniproduct_item" variant_id="{{item.id}}">
+							<div class="miniproduct_item_content">
+								<div class="miniproduct_item_img"> <img src="{{ item | img_url: 'x190' }}" alt="{{ item.image.alt | escape }}"> </div>
+								<div class="miniproduct_item_detail">
+									<a href="{{ item.url }}">
+										<p class="miniproduct_title">{{ item.product.title }}</p>
+									</a>
+									<div class="miniproduct_price">
+										<p class="regular_price">{{ item.final_price | money }}</p>
+									</div>
+									<div class="qtymain">
+										<div class="qtyinner">
+											<div class="qtyicons"> <i class="ri-subtract-line sub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 11h14v2H5z"/></svg></i>
+												<input id="updates_{{ item.key }}" class="cart__qty-input" type="number" value="{{ item.quantity }}" min="0" pattern="[0-9]*" data-quantity-input data-quantity-item="{{ forloop.index }}" data-quantity-input-mobile> <i class="ri-add-line add"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"/></svg></i> </div>
+										</div>
+										<div class="remove">
+											<div class="text-link text-link--acnt"  data-cart-remove>
+												<p>Remove</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div> {% endfor %}
+						<!-- <input type="submit" name="checkout" value="Checkout" />
+             -->
+					</div>
+					<div class="Maincheckout {% if cart.item_count <= 0%} remveoverlay {%endif%}">
+						<div class="subtotal" mini-cart-subtotal>
+							<label>Subtotal</label>
+							<p class="tprice">{{ cart.total_price | money }}</p>
+						</div>
+						<div class="checkout_btn  button button--full-width button--secondary ">
+							<input type="submit" name="checkout" value="Checkout"> </div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{ 'cartdrawer.css' | asset_url | stylesheet_tag }}
+
+
+{% schema %}
+{
+"name": "CartDrawer",
+"settings": []
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

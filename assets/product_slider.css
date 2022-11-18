@@ -1,0 +1,225 @@
+/* Loader CSS */
+ /*Hidden class for adding and removing*/
+ .lds-dual-ring.hidden {
+    display: none;
+}
+
+/*Add an overlay to the entire page blocking any further presses to buttons or other elements.*/
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(51, 50, 50, 0.8);
+    z-index: 999;
+    opacity: 1;
+    transition: all 0.5s;
+}
+
+/*Spinner Styles*/
+.lds-dual-ring {
+    width: 100%;
+    height: 100%;
+    z-index: 9999999;
+}
+.lds-dual-ring.active {
+    display: inline-block !important;
+}
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 25% auto;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Slider CSS */
+
+.assesment-slider-product:not(:first-child) {
+    display: none;
+}
+
+div#slider-container {
+    background: lightgray;
+    padding: 50px;
+
+}
+
+.heading-slider h1 {
+    margin-top: 0px;
+}
+
+span.wishlist_btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+}
+
+span.wishlist_btn.active .selected {
+    display: block
+}
+
+div#collection_product_container .assesment-slider-product {
+    margin-bottom: 10px;
+}
+
+span.wishlist_btn .selected,
+span.wishlist_btn.active .unselected
+{
+    display: none
+}
+
+.assesment-slider-product {
+    position: relative;
+    background-color: white;
+    margin: 0px 5px;
+}
+
+
+
+.slick-prev {
+    left: -40px;
+}
+
+.slick-next {
+    right: -40px;
+}
+
+.slick-slide img {
+    display: block;
+    width: 100%;
+}
+
+.product-title {
+    text-align: center;
+}
+
+
+.product-price {
+    text-align: center;
+    font-size: 18px;
+    margin: 10px 0px;
+}
+
+.product-title h3 {
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.product-cta {
+    text-align: center;
+    margin: 0 12px;
+    padding: 13px 0;
+}
+
+.product-cta .cta-button {
+    width: 100%;
+    padding: 25px;
+    background: black;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.slick-next {
+
+    z-index: 999999;
+}
+
+.slick-prev {
+    z-index: 999999;
+}
+
+.collection_product_container.slick-initialized.slick-slider {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    font-size: 0px !important;
+}
+
+.slick-prev:before {
+    content: '' !important;
+    background-image: url(https://cdn.shopify.com/s/files/1/0613/8403/2432/files/arrow.png?v=1649181614);
+    background-size: contain;
+    padding: 12px;
+    background-repeat: no-repeat;
+    background-color: white;
+    transform: rotate(180deg) !important;
+    display: block;
+}
+
+.slick-next:before {
+    content: '' !important;
+    background-image: url(https://cdn.shopify.com/s/files/1/0613/8403/2432/files/arrow.png?v=1649181614);
+    background-size: contain;
+    padding: 12px;
+    background-repeat: no-repeat;
+    background-color: white;
+    display: block;
+}
+
+.slick-prev,
+.slick-next {
+    font-size: unset !important;
+    line-height: unset !important;
+    position: absolute;
+    top: unset !important;
+    display: block;
+    width: unset !important;
+    height: 100% !important;
+    padding: 5px ;
+    -webkit-transform: translate(0, 0) !important;
+    background-color: white !important;
+    -ms-transform: translate(0, 0) !important;
+    transform: translate(0, 0) !important;
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+@media only screen and (max-width: 1024px) {
+    .product-title h3 {
+        font-size: 18px;
+    }
+    .product-cta .cta-button {
+        padding: 20px;
+        font-size: 14px;
+    
+    }
+  }
+
+@media only screen and (max-width: 500px) {
+    div#slider-container {
+        padding: 10px 20px;    
+    }
+    .heading-slider h1 {
+        text-align: center;
+    }
+    .product-cta .cta-button { 
+        padding: 16px;
+        font-size: 16px; 
+    }
+ 
+  }

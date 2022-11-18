@@ -1,0 +1,76 @@
+{% if section.settings.collection.products_count > 0 %}
+
+<section>
+    <div id="slider-container">
+        <div class="heading-slider">
+            <h1>{{ section.settings.slider_heading }}</h1>
+        </div>
+
+        <div class="collection_product_container">
+            {% for product in section.settings.collection.products %}
+            <div>
+                <div class="assesment-slider-product" style="display: none;">
+                    <div class="product-image"> 
+                        <img loading="lazy" src="{{ product.featured_image | img_url: "300x300" }}" alt="{{ product.title }}">
+                    </div>
+                    <div class="product-title">
+                        <h3>{{ product.title }}</h3>
+                    </div>
+                    <div class="product-price">
+                        {{ product.selected_or_first_available_variant.price | money_with_currency }}
+                    </div>
+                    <div class="product-cta">
+                    {% if product.has_only_default_variant %}
+                        <button class="add-to-cart-js cta-button" data-href="#productslide_modal" data-id="{{product.selected_or_first_available_variant.id}}"> Add to Cart </button>
+                    {% else %}
+                        <button class="cta-button" onclick="window.location.href='{{ product.url }}'"> Select Options </button>
+                    {% endif %}
+                    </div>
+
+                    <span class="wishlist_btn" handle ="/products/{{product.handle }}">
+                     <svg class="unselected" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6.28 3c3.236.001 4.973 3.491 5.72 5.031.75-1.547 2.469-5.021 5.726-5.021 2.058 0 4.274 1.309 4.274 4.182 0 3.442-4.744 7.851-10 13-5.258-5.151-10-9.559-10-13 0-2.676 1.965-4.193 4.28-4.192zm.001-2c-3.183 0-6.281 2.187-6.281 6.192 0 4.661 5.57 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-4.011-3.097-6.182-6.274-6.182-2.204 0-4.446 1.042-5.726 3.238-1.285-2.206-3.522-3.248-5.719-3.248z"/></svg>
+                     <svg class="selected" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/></svg>
+                      
+                      </span>
+                </div>
+            </div>
+           
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+{% endif %}
+
+{% schema %}
+{
+"name": "Assesment Slider",
+"tag": "section",
+"class": "section",
+"settings": [
+
+{
+"type": "header",
+"content": "General Settings"
+},
+{
+"type": "text",
+"id": "slider_heading",
+"label": "Title for slider",
+"default": "Slideshow about our brand"
+},
+{
+"type": "collection",
+"id": "collection",
+"label": "Select Collection for Slider Content"
+}
+
+],
+"presets": [
+{
+"name": "Collection Slider"
+}
+]
+}
+{% endschema %}
